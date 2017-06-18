@@ -1,7 +1,6 @@
 #-*- coding: utf-8 -*-
 '''
 Created on 07.05.2017
-
 @author: Michał Stypczyński
 '''
 
@@ -10,9 +9,9 @@ import numpy as np
 
 if __name__ == '__main__':
     cap = cv2.VideoCapture(0)
-    #fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    #out = cv2.VideoWriter('output.avi',fourcc, 20.0, (800,600))
-    line_color = [([210,210,210], [255,255,255])]
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    out = cv2.VideoWriter('output.avi',fourcc, 20.0, (800,600))
+    line_color = [([180,180,180], [255,255,255])]
     while(True):
         
         ret, frame = cap.read()
@@ -41,9 +40,10 @@ if __name__ == '__main__':
                     cv2.line(frame,(x1,y1),(x2,y2),(0,0,255),2)  
         
         cv2.imshow('frame',frame)
-       # out.write(frame)
+        cv2.imshow('raw', edges)
+        out.write(frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     cap.release()
-    #out.release()
-    cv2.destroyAllWindows()
+    out.release()
+cv2.destroyAllWindows()
